@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "jacob"
+    },
+    {
+      "id": "3d10",
+      "username": "james"
+    },
+    {
+      "id": "6293",
+      "username": "jon"
+    },
+    {
+      "id": "8417",
+      "username": "someone else"
+    }
+  ]
+}
