@@ -1,30 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useAddUserMutation, useGetUsersQuery } from "./store/usersApi";
 
 export const UsersList = () => {
-  const [users, setUsers] = useState([]);
   const [username, setUsername] = useState("");
+  const { data: users } = useGetUsersQuery();
+  const [addUser] = useAddUserMutation();
 
-  const getUsers = async () => {
-    const { data } = await axios.get('http://localhost:9000/users');
-    setUsers(data);
-  }
-
-  useEffect(() => {
-    getUsers();
-  }, [])
-
-  const addUser = async () => {
-    const { data } = await axios.post('http://localhost:9000/users', { username });
-    setUsers([...users, data]);
+  const handleAddUser = () => {
+    addUser({ username });
+    setUsername('');
   }
 
   return (
     <>
       <input value={username} onChange={(e) => setUsername(e.target.value)} />
-      <button onClick={addUser}>Add</button>
+      <button onClick={handleAddUser}>Add</button>
       <ul>
-        {users.map((user) => (
+        {users?.map((user) => (
           <li key={user.id}>{user.username}</li>
         ))}
       </ul>
